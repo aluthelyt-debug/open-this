@@ -5,44 +5,65 @@
   <title>Hi Sheena ❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
 
   <style>
     * {
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
     }
 
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(180deg, #ffe3ec, #ffd6e8);
+      overflow: hidden;
+      background: linear-gradient(180deg, #ffe1ec, #ffd1e6);
       display: flex;
       justify-content: center;
       align-items: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Floating flowers */
+    .flower {
+      position: absolute;
+      font-size: 20px;
+      animation: float linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh) rotate(0deg);
+      }
+      to {
+        transform: translateY(-10vh) rotate(360deg);
+      }
     }
 
     .card {
+      position: relative;
       background: #fff7fa;
       width: 90%;
       max-width: 420px;
-      padding: 28px 24px;
-      border-radius: 22px;
+      padding: 30px 26px;
+      border-radius: 24px;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(255, 120, 170, 0.25);
+      box-shadow: 0 25px 50px rgba(255, 120, 170, 0.35);
+      z-index: 10;
     }
 
     h1 {
+      font-family: 'Pacifico', cursive;
       color: #ff4f8b;
-      font-size: 22px;
+      font-size: 26px;
       margin-bottom: 18px;
     }
 
     p {
       color: #5a3a44;
       font-size: 14px;
-      line-height: 1.7;
+      line-height: 1.8;
       margin-bottom: 14px;
     }
 
@@ -52,63 +73,62 @@
       color: #ff4f8b;
     }
 
-    .music {
-      margin-top: 18px;
-      font-size: 13px;
+    .hint {
+      margin-top: 14px;
+      font-size: 12px;
       color: #777;
-    }
-
-    .music button {
-      margin-top: 8px;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 20px;
-      background: #ff7aa8;
-      color: white;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .music button:hover {
-      background: #ff5f96;
     }
   </style>
 </head>
 <body>
 
+  <!-- Floating flowers -->
+  <script>
+    const flowers = ["🌸","🌺","🌷","💮"];
+    for (let i = 0; i < 20; i++) {
+      const f = document.createElement("div");
+      f.className = "flower";
+      f.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+      f.style.left = Math.random() * 100 + "vw";
+      f.style.animationDuration = 10 + Math.random() * 10 + "s";
+      f.style.fontSize = 16 + Math.random() * 18 + "px";
+      document.body.appendChild(f);
+    }
+  </script>
+
   <div class="card">
     <h1>Hi Sheena ❤️</h1>
 
     <p>
-      Sheena, alam kong matagal na tayong mag kaibigan and masaya ka naman maging kaibigan, we’ve also been through a lot together na din as friends. 
-      Pero may gusto akong aminin, matagal ko ’tong pinag-isipan like, in-observe ko muna beforehand if sure ba talaga ang nararamdaman ko sayo, 
-      pero ano ha i’d totally respect your decision, we always can stay friends if you want and i won’t get my hopes up.
+      Sheena, alam kong matagal na tayong mag kaibigan and masaya ka naman maging kaibigan,
+      we’ve also been through a lot together na din as friends. Pero may gusto akong aminin,
+      matagal ko ’tong pinag-isipan like, in-observe ko muna beforehand if sure ba talaga ang
+      nararamdaman ko sayo, pero ano ha i’d totally respect your decision, we always can stay
+      friends if you want and i won’t get my hopes up.
     </p>
 
     <p>
-      Dapat amin ako sayo kapag nasa prime era na ako eh, ang tagal naman kasi mag 3rd sem tangina, 
-      lumalaban din kasi yung thought na baka if matagal pa akong umamin, may mauuna na sa’kin. 
+      Dapat amin ako sayo kapag nasa prime era na ako eh, ang tagal naman kasi mag 3rd sem tangina,
+      lumalaban din kasi yung thought na baka if matagal pa akong umamin, may mauuna na sa’kin.
       That’s why i’ve decided to say it now, crush kita hehehe
     </p>
 
     <div class="from">— from me 💌</div>
-
-    <div class="music">
-      🎧 Play this while reading <br />
-      <button onclick="playMusic()">Play music</button>
-    </div>
+    <div class="hint">🎧 music is playing</div>
   </div>
 
-  <!-- Cute background music -->
-  <audio id="bgMusic" loop>
+  <!-- Background Music -->
+  <audio id="bgMusic" autoplay muted loop>
     <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c7a4e1f4a.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    function playMusic() {
+    // Unmute music on first interaction
+    document.addEventListener("click", () => {
       const music = document.getElementById("bgMusic");
+      music.muted = false;
       music.play();
-    }
+    }, { once: true });
   </script>
 
 </body>
